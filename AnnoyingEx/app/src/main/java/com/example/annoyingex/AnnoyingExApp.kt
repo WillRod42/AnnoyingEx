@@ -22,6 +22,10 @@ class AnnoyingExApp: Application() {
     }
 
     fun getRandomMessage(): String {
-        return messages[Random.nextInt(0, messages.size)]
+        if(messages[0] == MessageFetch.FAILED_REQUEST) {
+            return "unable to retrieve message"
+        } else {
+            return messages[Random.nextInt(0, messages.size)]
+        }
     }
 }

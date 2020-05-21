@@ -20,7 +20,7 @@ class AEWorkerManager(private val context: Context) {
                 .setRequiresCharging(true)
                 .build()
 
-            val workRequest = PeriodicWorkRequestBuilder<AnnoyingWorker>(5, TimeUnit.SECONDS)
+            val workRequest = PeriodicWorkRequestBuilder<AnnoyingWorker>(20, TimeUnit.MINUTES)
                 .setConstraints(constraints)
                 .setInitialDelay(5, TimeUnit.SECONDS)
                 .addTag(AE_WORK_REQUEST_TAG)

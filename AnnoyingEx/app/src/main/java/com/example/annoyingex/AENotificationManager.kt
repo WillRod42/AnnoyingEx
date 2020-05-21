@@ -18,6 +18,7 @@ class AENotificationManager(private val context: Context) {
 
     companion object {
         const val CHANNEL_ID = "AECHANNEL"
+        const val MESSAGE_EXTRA = "message_extra"
     }
 
     init {
@@ -25,16 +26,18 @@ class AENotificationManager(private val context: Context) {
     }
 
     fun makeNotification() {
+        val message = app.getRandomMessage()
         val intent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            putExtra(MESSAGE_EXTRA, message)
         }
 
         val pendingIntent = PendingIntent.getActivity(context, 0, intent,PendingIntent.FLAG_UPDATE_CURRENT)
 
-        val message = app.getRandomMessage()
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setContentTitle("Ex")
             .setContentText(message)
+            .setCategory("message")
             .setSmallIcon(R.drawable.ic_directions_run_black_24dp)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingIntent)

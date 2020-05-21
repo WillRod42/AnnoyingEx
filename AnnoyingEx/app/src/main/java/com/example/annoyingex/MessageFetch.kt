@@ -13,6 +13,10 @@ class MessageFetch(private val context: Context) {
     private val requestQueue = Volley.newRequestQueue(context)
     private val url = "https://raw.githubusercontent.com/echeeUW/codesnippets/master/ex_messages.json"
 
+    companion object {
+        const val FAILED_REQUEST = "failed request"
+    }
+
     fun getMessages(onMessagesReady: (Messages) -> Unit) {
         val stringRequest = StringRequest(Request.Method.GET, url,
             Response.Listener { response ->
@@ -22,6 +26,7 @@ class MessageFetch(private val context: Context) {
                 onMessagesReady(messagesList)
             },
             Response.ErrorListener {
+                onMessagesReady(Messages(listOf(FAILED_REQUEST)))
                 Toast.makeText(context, "Volley request failed", Toast.LENGTH_SHORT).show()
             })
         requestQueue.add(stringRequest)
