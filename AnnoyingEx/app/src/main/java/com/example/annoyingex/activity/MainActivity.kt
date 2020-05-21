@@ -32,6 +32,4 @@ class MainActivity : AppCompatActivity() {
             annoyingExApp.aeWorkerManager.stopExTexts()
         }
     }
-
-
 }
