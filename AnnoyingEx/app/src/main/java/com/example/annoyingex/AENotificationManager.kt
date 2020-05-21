@@ -14,6 +14,7 @@ import kotlin.random.Random
 
 class AENotificationManager(private val context: Context) {
     private val notificationManagerCompat = NotificationManagerCompat.from(context)
+    private val app = context.applicationContext as AnnoyingExApp
 
     companion object {
         const val CHANNEL_ID = "AECHANNEL"
@@ -30,9 +31,10 @@ class AENotificationManager(private val context: Context) {
 
         val pendingIntent = PendingIntent.getActivity(context, 0, intent,PendingIntent.FLAG_UPDATE_CURRENT)
 
+        val message = app.getRandomMessage()
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setContentTitle("Ex")
-            .setContentText("TESTING")
+            .setContentText(message)
             .setSmallIcon(R.drawable.ic_directions_run_black_24dp)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingIntent)

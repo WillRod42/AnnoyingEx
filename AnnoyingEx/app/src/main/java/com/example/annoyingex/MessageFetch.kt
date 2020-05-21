@@ -17,9 +17,9 @@ class MessageFetch(private val context: Context) {
         val stringRequest = StringRequest(Request.Method.GET, url,
             Response.Listener { response ->
                 val gson = Gson()
-                val messages = gson.fromJson(response, Messages::class.java)
+                val messagesList = gson.fromJson(response, Messages::class.java)
 
-                onMessagesReady(messages)
+                onMessagesReady(messagesList)
             },
             Response.ErrorListener {
                 Toast.makeText(context, "Volley request failed", Toast.LENGTH_SHORT).show()
