@@ -9,11 +9,11 @@ import com.android.volley.Response
 import com.google.gson.Gson
 
 
-class MessageFetch(context: Context) {
+class MessageFetch(private val context: Context) {
     private val requestQueue = Volley.newRequestQueue(context)
     private val url = "https://raw.githubusercontent.com/echeeUW/codesnippets/master/ex_messages.json"
 
-    fun getMessages(context: Context, onMessagesReady: (Messages) -> Unit) {
+    fun getMessages(onMessagesReady: (Messages) -> Unit) {
         val stringRequest = StringRequest(Request.Method.GET, url,
             Response.Listener { response ->
                 val gson = Gson()
